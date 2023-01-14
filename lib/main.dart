@@ -52,12 +52,17 @@ class MyApp extends StatelessWidget {
             appBar: AppBar(
               title: const Text("MAPD722 Pay Calculator"),
             ),
-            body: Column(
-              children: const [
-                FormPanel(),
-                OutputPanel(),
-                AboutPanel(),
-              ],
+            body: SingleChildScrollView(
+              child: SizedBox(
+                height: 700,
+                child: Column(
+                  children: const [
+                    FormPanel(),
+                    OutputPanel(),
+                    AboutPanel(),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -210,7 +215,7 @@ class _OutputPanelState extends State<OutputPanel> {
       child: Container(
           width: double.infinity,
           margin: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
-          padding: const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 20.0),
+          padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 20.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
