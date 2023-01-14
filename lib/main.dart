@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+// ******************************************************
+// MAPD722 W23 Web Tech Assignment 1
+// Written by: Samuel Sum 300858503
+// Pay Calculator
+// Version 1.00
+// *******************************************************
 class MainModel extends ChangeNotifier {
   double _hours = 0;
   double _rates = 0;
@@ -21,15 +27,6 @@ class MainModel extends ChangeNotifier {
       _rates = value;
       notifyListeners();
     }
-  }
-}
-
-mixin InputValidationMixin {
-  bool isPositive(double number) => number > 0;
-
-  bool isNumeric(String value) {
-    RegExp regex = RegExp(r"^-?\d*\.?\d*$");
-    return value.isNotEmpty && regex.hasMatch(value);
   }
 }
 
@@ -66,6 +63,15 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+mixin InputValidationMixin {
+  bool isPositive(double number) => number > 0;
+
+  bool isNumeric(String value) {
+    RegExp regex = RegExp(r"^-?\d*\.?\d*$");
+    return value.isNotEmpty && regex.hasMatch(value);
   }
 }
 
