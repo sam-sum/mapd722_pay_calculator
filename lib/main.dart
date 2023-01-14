@@ -113,9 +113,13 @@ class _FormPanelState extends State<FormPanel> with InputValidationMixin {
                   if (isPositive(double.parse(value))) {
                     return null;
                   } else {
+                    Provider.of<MainModel>(context, listen: false).hours = 0;
+                    Provider.of<MainModel>(context, listen: false).rates = 0;
                     return 'Please enter a positive number';
                   }
                 } else {
+                  Provider.of<MainModel>(context, listen: false).hours = 0;
+                  Provider.of<MainModel>(context, listen: false).rates = 0;
                   return 'Please enter the hours worked in numeric';
                 }
               },
@@ -138,9 +142,13 @@ class _FormPanelState extends State<FormPanel> with InputValidationMixin {
                   if (isPositive(double.parse(value))) {
                     return null;
                   } else {
+                    Provider.of<MainModel>(context, listen: false).hours = 0;
+                    Provider.of<MainModel>(context, listen: false).rates = 0;
                     return 'Please enter a positive number';
                   }
                 } else {
+                  Provider.of<MainModel>(context, listen: false).hours = 0;
+                  Provider.of<MainModel>(context, listen: false).rates = 0;
                   return 'Please enter the hourly rate in numeric';
                 }
               },
