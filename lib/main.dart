@@ -24,6 +24,15 @@ class MainModel extends ChangeNotifier {
   }
 }
 
+mixin InputValidationMixin {
+  bool isPositive(double number) => number > 0;
+
+  bool isNumeric(String value) {
+    RegExp regex = RegExp(r"^-?\d*\.?\d*$");
+    return value.isNotEmpty && regex.hasMatch(value);
+  }
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -67,7 +76,7 @@ class FormPanel extends StatefulWidget {
   State<FormPanel> createState() => _FormPanelState();
 }
 
-class _FormPanelState extends State<FormPanel> {
+class _FormPanelState extends State<FormPanel> with InputValidationMixin {
   final _formKey = GlobalKey<FormState>();
   TextEditingController hoursController = TextEditingController();
   TextEditingController ratesController = TextEditingController();
@@ -91,7 +100,8 @@ class _FormPanelState extends State<FormPanel> {
           children: <Widget>[
             TextFormField(
               controller: hoursController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true, signed: false),
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
@@ -99,12 +109,14 @@ class _FormPanelState extends State<FormPanel> {
                 labelStyle: const TextStyle(fontSize: 16.0),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter the hours worked';
-                } else if (double.parse(value) < 0) {
-                  return 'Please enter a positive value';
+                if (isNumeric(value!)) {
+                  if (isPositive(double.parse(value))) {
+                    return null;
+                  } else {
+                    return 'Please enter a positive number';
+                  }
                 } else {
-                  return null;
+                  return 'Please enter the hours worked in numeric';
                 }
               },
             ),
@@ -113,7 +125,8 @@ class _FormPanelState extends State<FormPanel> {
             ),
             TextFormField(
               controller: ratesController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true, signed: false),
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
@@ -121,12 +134,14 @@ class _FormPanelState extends State<FormPanel> {
                 labelStyle: const TextStyle(fontSize: 16.0),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter the hourly rate';
-                } else if (double.parse(value) < 0) {
-                  return 'Please enter a positive value';
+                if (isNumeric(value!)) {
+                  if (isPositive(double.parse(value))) {
+                    return null;
+                  } else {
+                    return 'Please enter a positive number';
+                  }
                 } else {
-                  return null;
+                  return 'Please enter the hourly rate in numeric';
                 }
               },
             ),
